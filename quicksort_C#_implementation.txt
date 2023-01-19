@@ -1,0 +1,71 @@
+using System;
+
+public class wahome
+{
+
+    private static void Sort(int[] numbers)
+    {
+        swap(numbers, 0, numbers.Length - 1);
+    }
+
+    private static void swap(int[] numbers, int left, int right)
+    {
+
+        int i = left;
+        int j = right;
+
+        var pivot = numbers[(left + right) / 2];
+
+        while (i <= j)
+        {
+            while (numbers[i] < pivot)
+                i++;
+
+            while (numbers[j] > pivot)
+                j--;
+
+            if (i <= j)
+            {
+                var tmp = numbers[i];
+                numbers[i] = numbers[j];
+                numbers[j] = tmp;
+
+                i++;
+                j--;
+            }
+        }
+
+        if (left < j)
+            //recursion. we are calling the swap method within itself. 
+swap(numbers, left, j);
+
+        if (i < right)
+
+//recursion. we are calling the swap method within itself.
+
+            swap(numbers, i, right);
+    }
+
+
+    public static void Main(string[] args)
+    {
+        var numbers = new[] { 1, 5, 0, 34, 3, 9, 23, 67, 13, 33, 23, 5 };
+        Console.WriteLine("The initail numbers were:");
+        foreach (int number in numbers)
+        {
+
+            Console.Write(number + " ");
+
+        }
+        Console.WriteLine("");
+        Console.WriteLine("The sorted numbers were:");
+        Sort(numbers);
+        foreach (int number in numbers)
+        {
+
+            Console.Write(number + " ");
+
+        }
+        Console.ReadKey();
+    }
+}
